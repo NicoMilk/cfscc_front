@@ -8,7 +8,7 @@
                 <p>Date : {{event.date_start}}</p>                
                 <p v-if="event.slots_left != null">Places restantes : {{event.slots_left}}</p>                
                 <p>Inscrits : {{event.registered}}</p>
-                <button v-if="(event.type == 'PSC1'|| event.type == 'PSE1'|| event.type == 'PSE2'|| event.type == 'RECYCLAGE') && !isLogged" type="button" class="btn btn-primary" data-toggle="modal" data-target="#newGuestModal">Créer un compte et m'inscrire</button>
+                <button v-if="(event.type == 'PSC1'|| event.type == 'PSE1'|| event.type == 'PSE2'|| event.type == 'RECYCLAGE') && !isLogged" @click="setCurrentEventId(event.event_id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#newGuestModal">Créer un compte et m'inscrire</button>
                 <!-- <button v-if="(event.type == 'Poste'|| event.type == 'Garde en caserne'|| event.type == 'Divers') && (isAdmin || isMember)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#newGuestModal">Je m'inscris</button> -->
                 <button v-else-if="isLogged" @click="storeRegistration(event.event_id)" type="button" class="btn btn-primary">Je m'inscris !</button>
                 <!-- <button v-else-if="event.type != 'PSC1' && !isLogged" @click="storeRegistration(event.event_id)" type="button" class="btn btn-primary">Je m'inscris !</button> -->
@@ -85,6 +85,8 @@ export default {
         email: "",
         password: "",
       },
+
+      currentEvent_id: "",  // needed for registerNewGuest
     };
   },
 
@@ -132,6 +134,10 @@ export default {
 
   methods: {
 
+    setCurrentEventId(event_id){
+      this.currentEvent_id = event_id
+    },
+
     registerNewGuest() {
       user.register(this.formGuest)
       .then(
@@ -150,8 +156,7 @@ export default {
       )
       .then (
         (response) => {
-
-      this.storeRegistration(this.event_id)  // TODO implement (envoie le token précédent ???)
+      this.storeRegistration(this.currentEvent_id)  // TODO implement (envoie le token précédent ???)
       // await storeRegistration(this.event_id)  // TODO implement (envoie le token précédent ???)
       })
       }
@@ -164,7 +169,7 @@ export default {
       const response = await user.auth()
 
       this.formEvent.user_id = response.data.user_id;
-      this.formEvent.event_id = this.event_id;
+      this.formEvent.event_id = event_id;
 
       registration.storeRegistration(this.formEvent)
       .then(

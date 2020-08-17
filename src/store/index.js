@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate";
 
-// const url = "http://localhost:8000/api/";
-const url = process.env.URL_API;
+const url = "http://localhost:8000/api/";
+// const url = process.env.URL_API;
 const status = response => (response.status >= 200 && response.status < 300) ? Promise.resolve(response) : Promise.reject((response.statusText)); // TIP shorthand for actions
 
 Vue.use(Vuex)
