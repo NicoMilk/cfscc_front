@@ -5,16 +5,53 @@
       <br>
       <br>
       <div class="content h-100 overflow-auto bg-light px-4" >                 
-          <div v-for="(event, index) in eventsStore" :key="index">
-              <div>
-                <strong>{{event.type}}</strong>                
-                <p>Date : {{event.date_start}}</p>                
-                <p>Places restantes : {{event.slots_left}}</p>                
-                <p>Inscrits : {{event.registered}}</p>
-                <button type="button" class="btn btn-danger" @click="destroyEvent(event.event_id)" >Supprimer</button>
-                <hr>            
-              </div> 
+        <div v-for="(event, index) in eventsStore" :key="index">
+          <div class="accordion" id="accordion">
+            <div class="card">
+              <div class="card-header" :id="'heading'+event.event_id">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" @click="getEvent(event.event_id)" type="button" data-toggle="collapse" :data-target="'#collapse'+event.event_id" aria-expanded="true" :aria-controls="'collapse'+event.event_id">
+                    <strong>{{event.type}}</strong>                
+                    <p>Date : {{event.date_start}}</p>                
+                    <p>Places restantes : {{event.slots_left}}</p>                
+                    <p>Inscrits : {{event.registered}}</p>
+                  </button>
+                </h2>
+              </div>
+
+              <div :id="'collapse'+event.event_id" class="collapse" :aria-labelledby="'heading'+event.event_id" data-parent="#accordion">
+                <div class="card-body">
+                  <label for="type">Type :</label>
+                  <select class="form-control" v-model="selectedEvent.type" id="type">
+                    <option>PSC1</option>
+                    <option>PSE1</option>
+                    <option>PSE2</option>
+                    <option>RECYCLAGE</option>
+                    <option>DPS</option>
+                    <option>Garde en caserne</option>
+                    <option>Divers</option>
+                  </select><br>
+                  <label for="description">Description :</label>
+                  <textarea class="form-control" v-model="selectedEvent.description" id="description" rows="5"></textarea><br>
+                  <label for="date_start">Date de début :</label>
+                  <input type="date" class="form-control" v-model="selectedEvent.date_start" id="date_start"/><br>
+                  <label for="date_end">Date de fin :</label>
+                  <input type="date" class="form-control" v-model="selectedEvent.date_end" id="date_end"/><br>
+                  <label for="price">Prix :</label>
+                  <input type="text" class="form-control" v-model="selectedEvent.price" id="price"/><br>
+                  <label for="slots_left">Places restantes :</label>
+                  <input type="text" class="form-control" v-model="selectedEvent.slots_left" id="slots_left"/><br>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" @click="updateEvent(event.event_id)">Mettre à jour</button>
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="accordion">Annuler</button> -->
+                    <button type="button" class="btn btn-danger" @click="destroyEvent(event.event_id)">Supprimer l'évènement</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
 
       <!-- MODAL NEW EVENT -->
@@ -41,7 +78,7 @@
               <input type="date" class="form-control" v-model="form.date_start" id="date_start"/><br>
               <label for="date_end">Date de fin :</label>
               <input type="date" class="form-control" v-model="form.date_end" id="date_end"/><br>
-              <label for="price">Prix. :</label>
+              <label for="price">Prix :</label>
               <input type="text" class="form-control" v-model="form.price" id="price"/><br>
               <label for="slots_left">Places restantes :</label>
               <input type="text" class="form-control" v-model="form.slots_left" id="slots_left"/><br>
@@ -75,6 +112,8 @@ export default {
         price: "",
         slots_left: ""
       },
+
+      selectedEvent: {},
     };
   },
 
@@ -95,6 +134,15 @@ export default {
           this.$router.push({name : "Home"});
         }
       )
+    },
+
+    getEvent(id) {
+      event.getEvent(id)
+        .then(response => this.selectedEvent = response.data);
+    },
+
+    updateEvent(id) {
+      event.updateEvent(id, this.selectedEvent)
     },
 
     destroyEvent(id) {
