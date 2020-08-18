@@ -1,8 +1,8 @@
 import axios from "axios"
 
 let baseApi=axios.create({
-    baseURL : "http://localhost:8000/api",
-    // baseURL : process.env.URL_API,
+    // baseURL : "http://localhost:8000/api",
+    baseURL : process.env.VUE_APP_URL_API,
 })
 
 let Api = function () {
