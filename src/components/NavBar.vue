@@ -121,11 +121,19 @@ export default {
       .then(
         (response) => {
           this.$root.$emit("logged", true);
-          this.$root.$emit("admin", true);  // WARNING
+          // this.$root.$emit("admin", true);  // WARNING
           localStorage.setItem("api_token", response.data);
-          this.$router.push({name : "Home"});
         }
       )
+
+      // user.auth()
+      // .then(response => {
+      //   this.user = response.data;
+      //   if(this.user.role == "admin") {
+      //   this.isAdmin = true;
+      //   }
+      // });
+
     },
 
     logout() {

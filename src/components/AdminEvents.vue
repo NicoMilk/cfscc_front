@@ -1,6 +1,6 @@
 <template>
   <div class="adminEvents container">
-    <h1>Ceci est la gestion des ÉVÈNEMENTS pour ADMIN</h1>
+    <h1>Admin - Gérer les ÉVÈNEMENTS</h1>
       <button type="button" class="btn btn-primary mx-auto" data-toggle="modal" data-target="#newEventModal">Créer un nouvel évènement</button>
       <br>
       <br>
@@ -9,18 +9,27 @@
           <div class="accordion" id="accordion">
             <div class="card">
               <div class="card-header" :id="'heading'+event.event_id">
-                <h2 class="mb-0">
+                <h2 class="mb-0 d-flex justify-content-between align-items-center">
                   <button class="btn btn-link collapsed" @click="getEvent(event.event_id)" type="button" data-toggle="collapse" :data-target="'#collapse'+event.event_id" aria-expanded="true" :aria-controls="'collapse'+event.event_id">
                     <strong>{{event.type}}</strong>                
                     <p>Date : {{event.date_start}}</p>                
                     <p>Places restantes : {{event.slots_left}}</p>                
                     <p>Inscrits : {{event.registered}}</p>
                   </button>
+                  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Voir les inscrits
+                  </button> -->
                 </h2>
               </div>
 
               <div :id="'collapse'+event.event_id" class="collapse" :aria-labelledby="'heading'+event.event_id" data-parent="#accordion">
                 <div class="card-body">
+                  <strong>Inscrits :</strong>
+                    <div v-for="(eventUser, index) in eventUsers" :key="index">
+                      <p>{{eventUser.firstname}} {{eventUser.lastname}}</p>
+                    </div>
+                  <strong>Modifier l'évènement :</strong>
+                  <br>
                   <label for="type">Type :</label>
                   <select class="form-control" v-model="selectedEvent.type" id="type">
                     <option>PSC1</option>
@@ -98,6 +107,7 @@
 // @ is an alias to /src
 import user from '@/apis/user.js'
 import event from '@/apis/event.js'
+import registration from '@/apis/registration.js'
 
 export default {
   name: 'AdminEvents',
@@ -114,6 +124,7 @@ export default {
       },
 
       selectedEvent: {},
+      eventUsers: {},
     };
   },
 
@@ -139,6 +150,8 @@ export default {
     getEvent(id) {
       event.getEvent(id)
         .then(response => this.selectedEvent = response.data);
+      registration.getEventUsers(id)
+        .then(response => this.eventUsers = response.data);
     },
 
     updateEvent(id) {

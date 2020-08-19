@@ -1,6 +1,6 @@
 <template>
   <div class="adminUsers container">
-    <h1>Ceci est la gestion des UTILISATEURS pour ADMIN</h1>
+    <h1>Admin - Gérer les UTILISATEURS</h1>
       <button type="button" class="btn btn-primary mx-auto" data-toggle="modal" data-target="#newUserModal">Inscrire un nouvel utilisateur</button>
       <br>
       <br>

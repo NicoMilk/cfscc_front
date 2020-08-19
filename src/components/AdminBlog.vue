@@ -1,6 +1,6 @@
 <template>
   <div class="adminBlog container">
-    <h1>Ceci est la gestion du BLOG pour ADMIN</h1>
+    <h1>Admin - Gérer le BLOG</h1>
       <button type="button" class="btn btn-primary mx-auto" data-toggle="modal" data-target="#newBlogpostModal">Écrire un nouvel article</button>
       <br>
       <br>
