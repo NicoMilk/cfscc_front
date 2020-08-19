@@ -1,6 +1,9 @@
 <template>
   <div class="blogDisplay container">
-    <h1>This is the HOME/BLOG page (infinite scroll intended)</h1>
+    <h1>Bienvenue au CFSCC !</h1>
+    <h4>(Comité Français de Secourisme - Circonscription de Chennevières)</h4>
+    <br>
+    <h5>Dernières actus :</h5>
 
       <div class="content h-100 overflow-auto bg-light px-4" >                 
           <div v-for="(blogpost, index) in blogpostsStore" :key="index">

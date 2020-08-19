@@ -1,6 +1,8 @@
 <template>
   <div class="calendar container">
-    <h1>Ceci est le CALENDRIER</h1>
+    <br>
+    <h5>Prochaines formation et évènements : </h5>
+    <br>
       <div class="content h-100 overflow-auto bg-light px-4" >                 
           <div v-for="(event, index) in eventsStore" :key="index">
               <div>
@@ -9,10 +11,8 @@
                 <p v-if="event.slots_left != null">Places restantes : {{event.slots_left}}</p>                
                 <p>Inscrits : {{event.registered}}</p>
                 <button v-if="(event.type == 'PSC1'|| event.type == 'PSE1'|| event.type == 'PSE2'|| event.type == 'RECYCLAGE') && !isLogged" @click="setCurrentEventId(event.event_id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#newGuestModal">Créer un compte et m'inscrire</button>
-                <p v-else-if="(event.type == 'DPS'|| event.type == 'Garde en caserne'|| event.type == 'Divers') && (!isAdmin || !isMember)" class="text-muted">Seuls les adhérents connectés peuvent s'inscrire à ce type d'évènement</p>
-                <!-- <button v-if="(event.type == 'Poste'|| event.type == 'Garde en caserne'|| event.type == 'Divers') && (isAdmin || isMember)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#newGuestModal">Je m'inscris</button> -->
+                <!-- <p v-else-if="(event.type == 'DPS'|| event.type == 'Garde en caserne'|| event.type == 'Divers') && (!isAdmin || !isMember)" class="text-muted">Seuls les adhérents connectés peuvent s'inscrire à ce type d'évènement</p> -->
                 <button v-else-if="isLogged" @click="storeRegistration(event.event_id)" type="button" class="btn btn-primary">Je m'inscris !</button>
-                <!-- <button v-else-if="event.type != 'PSC1' && !isLogged" @click="storeRegistration(event.event_id)" type="button" class="btn btn-primary">Je m'inscris !</button> -->
                 <hr>            
               </div> 
           </div>
@@ -68,6 +68,8 @@ export default {
       isLogged: false,
       isAdmin: false,
       isMember: false,
+      isGuest: false,
+      user: null,
 
       formEvent: {
         event_id: "",
@@ -87,7 +89,7 @@ export default {
         password: "",
       },
 
-      currentEvent_id: "",  // needed for registerNewGuest
+      selectedEvent_id: "",  // needed for registerNewGuest
     };
   },
 
@@ -101,6 +103,8 @@ export default {
         this.user = response.data;
       });
     }
+  
+  
   },
 
 
@@ -133,10 +137,20 @@ export default {
     }
   },
 
+  // watch: {
+  //   user: function(user) {
+  //     if(user) {
+  //       this.isAdmin = this.user.role == 'admin';
+  //       this.isMember = this.user.role == 'member';
+  //       this.isGuest = this.user.role == 'guest';
+  //     }
+  //   }
+  // },
+
   methods: {
 
     setCurrentEventId(event_id){
-      this.currentEvent_id = event_id
+      this.selectedEvent_id = event_id
     },
 
     registerNewGuest() {
@@ -157,7 +171,7 @@ export default {
       )
       .then (
         (response) => {
-      this.storeRegistration(this.currentEvent_id)  // TODO implement (envoie le token précédent ???)
+      this.storeRegistration(this.selectedEvent_id)  // TODO implement (envoie le token précédent ???)
       // await storeRegistration(this.event_id)  // TODO implement (envoie le token précédent ???)
       })
       }
