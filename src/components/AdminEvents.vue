@@ -155,7 +155,7 @@ export default {
       event.getEvent(id)
         .then(response => this.selectedEvent = response.data);
       registration.getEventUsers(id)
-        .then(response => this.eventUsers = response.data);console.log(this.eventUser);
+        .then(response => this.eventUsers = response.data);
     },
 
     destroyRegistrationUser(reg_id) {

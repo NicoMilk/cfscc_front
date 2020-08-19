@@ -14,6 +14,10 @@ export default {
         return Api().patch(`events/${id}`, form)
     },
 
+    // updateCounters(id) {
+    //     return Api().patch(`events/${id}`)
+    // },
+    
     destroyEvent(id) {
         return Api().delete(`events/${id}`)
     },

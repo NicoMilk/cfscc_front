@@ -34,9 +34,30 @@
           </div>
         </li>
 
-        <!-- <li class="nav-item">
-          <router-link v-if ="!isLogged" class="nav-link" to="/login">Connexion</router-link>
-        </li> -->
+          <li class="nav-item dropdown">
+            <a v-if="!isLogged" class="nav-link dropdown-toggle" href="#" id="registerDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inscription</a>
+              <div class="dropdown-menu">
+                <!-- <form class="px-4 py-3"> -->
+                    <label for="lastname">Nom de famille :</label>
+                    <input type="text" class="form-control" v-model="formGuest.lastname" id="lastname"/><br>
+                    <label for="firstname">Prénom :</label>
+                    <input type="text" class="form-control" v-model="formGuest.firstname" id="firstname"/><br>
+                    <label for="email">Email :</label>
+                    <input type="email" class="form-control" v-model="formGuest.email" id="email"/>
+                    <small id="emailHelp" class="form-text text-muted">Votre email ne sera jamais communiqué à un tiers.</small><br>
+                    <label for="phone">Tel. :</label>
+                    <input type="text" class="form-control" v-model="formGuest.phone" id="phone"/>
+                    <small id="phoneHelp" class="form-text text-muted">10 chiffres sans séparateur.</small>
+                    <small id="phoneHelp" class="form-text text-muted">Votre numéro ne sera jamais communiqué à un tiers.</small><br>
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" class="form-control" v-model="formGuest.password" id="password"/>
+                    <small id="emailHelp" class="form-text text-muted">6 caractères minimum.</small><br>
+                    <label for="password_conf">Mot de passe (confirmation) :</label>
+                    <input type="password" class="form-control" v-model="formGuest.password_confirmation" id="password_confirmation"/><br>
+                  <button class="btn btn-primary" @click="registerNewGuest">Envoyer</button>
+                <!-- </form> -->
+              </div>
+          </li>
 
           <li class="nav-item dropdown">
             <a v-if="!isLogged" class="nav-link dropdown-toggle" href="#" id="loginDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Connexion</a>
@@ -57,6 +78,7 @@
 
       </ul>
     </div>
+    
   </nav>
 </template>
 
@@ -77,6 +99,19 @@ export default {
       user: null,
 
       form: {
+        email: "",
+        password: "",
+      },
+
+      formGuest: {
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: "",
+        password: "",
+      },
+
+      formLogin: {
         email: "",
         password: "",
       },
@@ -115,6 +150,25 @@ export default {
   },
 
   methods: {
+
+    registerNewGuest() {
+      user.register(this.formGuest)
+      .then(
+        (response) => {
+
+          this.formLogin.email = this.formGuest.email;
+          this.formLogin.password = this.formGuest.password;
+
+      user.login(this.formLogin)
+      .then(
+        (response) => {
+          this.$root.$emit("logged", true);
+          localStorage.setItem("api_token", response.data);
+        }
+      )
+      }
+      )
+    },
 
     login() {
       user.login(this.form)
