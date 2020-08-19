@@ -26,7 +26,11 @@
                 <div class="card-body">
                   <strong>Inscrits :</strong>
                     <div v-for="(eventUser, index) in eventUsers" :key="index">
-                      <p>{{eventUser.firstname}} {{eventUser.lastname}}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <p>{{eventUser.firstname}} {{eventUser.lastname}}</p>
+                        <button class="btn btn-danger" @click="destroyRegistrationUser(eventUser.reg_id)" type="submit">Désinscrire</button>
+                      </div>
+                        <hr>
                     </div>
                   <strong>Modifier l'évènement :</strong>
                   <br>
@@ -151,7 +155,11 @@ export default {
       event.getEvent(id)
         .then(response => this.selectedEvent = response.data);
       registration.getEventUsers(id)
-        .then(response => this.eventUsers = response.data);
+        .then(response => this.eventUsers = response.data);console.log(this.eventUser);
+    },
+
+    destroyRegistrationUser(reg_id) {
+      registration.destroyRegistration(reg_id)
     },
 
     updateEvent(id) {
