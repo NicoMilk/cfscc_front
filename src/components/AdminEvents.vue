@@ -1,25 +1,31 @@
 <template>
   <div class="adminEvents container">
     <h1>Admin - Gérer les ÉVÈNEMENTS</h1>
-      <button type="button" class="btn btn-primary mx-auto" data-toggle="modal" data-target="#newEventModal">Créer un nouvel évènement</button>
+      <button type="button" class="btn btn-success mx-auto" data-toggle="modal" data-target="#newEventModal">Créer un nouvel évènement</button>
       <br>
       <br>
-      <div class="content h-100 overflow-auto bg-light px-4" >                 
+      <div class="content h-100 overflow-auto px-0" >                 
         <div v-for="(event, index) in eventsStore" :key="index">
           <div class="accordion" id="accordion">
-            <div class="card">
+            <div class="card my-1">
               <div class="card-header" :id="'heading'+event.event_id">
-                <h2 class="mb-0 d-flex justify-content-between align-items-center">
+                <div class="mb-0 d-flex justify-content-between align-items-center">
                   <button class="btn btn-link collapsed" @click="getEvent(event.event_id)" type="button" data-toggle="collapse" :data-target="'#collapse'+event.event_id" aria-expanded="true" :aria-controls="'collapse'+event.event_id">
-                    <strong>{{event.type}}</strong>                
-                    <p>Date : {{event.date_start}}</p>                
-                    <p>Places restantes : {{event.slots_left}}</p>                
-                    <p>Inscrits : {{event.registered}}</p>
+                    <strong>{{event.type}}</strong>  
                   </button>
+                  <div>
+                    <p>Date : {{event.date_start}}</p>                
+                  </div>
+                  <div>
+                    <p>Places restantes : {{event.slots}}</p>                
+                  </div>
+                  <div>
+                    <p>Inscrits : {{event.registered}}</p>
+                  </div>
                   <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Voir les inscrits
                   </button> -->
-                </h2>
+                </div>
               </div>
 
               <div :id="'collapse'+event.event_id" class="collapse" :aria-labelledby="'heading'+event.event_id" data-parent="#accordion">
@@ -52,8 +58,8 @@
                   <input type="date" class="form-control" v-model="selectedEvent.date_end" id="date_end"/><br>
                   <label for="price">Prix :</label>
                   <input type="text" class="form-control" v-model="selectedEvent.price" id="price"/><br>
-                  <label for="slots_left">Places restantes :</label>
-                  <input type="text" class="form-control" v-model="selectedEvent.slots_left" id="slots_left"/><br>
+                  <label for="slots">Places restantes :</label>
+                  <input type="text" class="form-control" v-model="selectedEvent.slots" id="slots"/><br>
 
                   <div class="modal-footer">
                     <button type="button" class="btn btn-primary" @click="updateEvent(event.event_id)">Mettre à jour</button>
@@ -93,8 +99,8 @@
               <input type="date" class="form-control" v-model="form.date_end" id="date_end"/><br>
               <label for="price">Prix :</label>
               <input type="text" class="form-control" v-model="form.price" id="price"/><br>
-              <label for="slots_left">Places restantes :</label>
-              <input type="text" class="form-control" v-model="form.slots_left" id="slots_left"/><br>
+              <label for="slots">Places :</label>
+              <input type="text" class="form-control" v-model="form.slots" id="slots"/><br>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -124,7 +130,7 @@ export default {
         date_start: "",
         date_end: "",
         price: "",
-        slots_left: ""
+        slots: ""
       },
 
       selectedEvent: {},

@@ -5,7 +5,7 @@
     <br>
     <h5>Dernières actus :</h5>
 
-      <div class="content h-100 overflow-auto bg-light px-4" >                 
+      <div class="content h-100 overflow-auto bg-light px-0" >                 
           <div v-for="(blogpost, index) in blogpostsStore" :key="index">
               <div>
                 <strong>{{blogpost.title}}</strong>                

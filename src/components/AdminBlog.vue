@@ -1,21 +1,25 @@
 <template>
   <div class="adminBlog container">
     <h1>Admin - Gérer le BLOG</h1>
-      <button type="button" class="btn btn-primary mx-auto" data-toggle="modal" data-target="#newBlogpostModal">Écrire un nouvel article</button>
+      <button type="button" class="btn btn-success mx-auto" data-toggle="modal" data-target="#newBlogpostModal">Écrire un nouvel article</button>
       <br>
       <br>
-      <div class="content h-100 overflow-auto bg-light px-4" >                 
+      <div class="content h-100 overflow-auto px-0" >                 
           <div v-for="(blogpost, index) in blogpostsStore" :key="index">
             <div class="accordion" id="accordion">
-              <div class="card">
+              <div class="card my-1">
                 <div class="card-header" :id="'heading'+blogpost.blogpost_id">
-                  <h2 class="mb-0">
+                  <div class="mb-0 d-flex justify-content-between align-items-center">
                     <button class="btn btn-link collapsed" @click="getBlogpost(blogpost.blogpost_id)" type="button" data-toggle="collapse" :data-target="'#collapse'+blogpost.blogpost_id" aria-expanded="true" :aria-controls="'collapse'+blogpost.blogpost_id">
-                      <strong>{{blogpost.title}}</strong>                
-                      <p>Date : {{blogpost.created_at}}</p>                
-                      <p>Maj : {{blogpost.updated_at}}</p>
+                      <strong>{{blogpost.title}}</strong> 
                     </button> 
-                  </h2>
+                    <div>
+                      <p>Date : {{blogpost.created_at}}</p>                
+                    </div>
+                    <div>
+                      <p>Maj : {{blogpost.updated_at}}</p>
+                    </div>
+                  </div>
                 </div>
               <div :id="'collapse'+blogpost.blogpost_id" class="collapse" :aria-labelledby="'heading'+blogpost.blogpost_id" data-parent="#accordion">
                 <div class="card-body">

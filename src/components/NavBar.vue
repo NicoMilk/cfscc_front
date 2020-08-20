@@ -30,11 +30,13 @@
           <a v-if="isLogged" class="nav-link dropdown-toggle" href="#" id="loggedDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bonjour {{user.firstname}}</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <!-- <router-link class="dropdown-item" type = "button" to="#">Éditer mon profil</router-link> -->
+            <button class="dropdown-item text-muted" type = "button" href="#">Modifier mon profil</button>
+            <button class="dropdown-item text-muted" type = "button" href="#">Reset mot de passe</button>
             <button class="dropdown-item" type = "button" href="#" @click="logout">Déconnexion</button>
           </div>
         </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown">  <!-- register form for keynote only -->
             <a v-if="!isLogged" class="nav-link dropdown-toggle" href="#" id="registerDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inscription</a>
               <div class="dropdown-menu">
                 <!-- <form class="px-4 py-3"> -->

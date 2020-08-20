@@ -1,20 +1,23 @@
 <template>
   <div class="adminUsers container">
-    <h1>Admin - Gérer les UTILISATEURS</h1>
-      <button type="button" class="btn btn-primary mx-auto" data-toggle="modal" data-target="#newUserModal">Inscrire un nouvel utilisateur</button>
+    <h1 class="mx-auto">Admin - Gérer les UTILISATEURS</h1>
+      <button type="button" class="btn btn-success mx-auto" data-toggle="modal" data-target="#newUserModal">Inscrire un nouvel utilisateur</button>
       <br>
       <br>
-      <div class="content h-100 overflow-auto bg-light px-4" >  
+      <div class="content h-100 overflow-auto px-0" >  
         <div v-for="(user, index) in usersStore" :key="index">
 
           <div class="accordion" id="accordion">
-            <div class="card">
+            <div class="card my-1">
               <div class="card-header" :id="'heading'+user.user_id">
-                <h2 class="mb-0">
+                <div class="mb-0 d-flex justify-content-between align-items-center">
                   <button class="btn btn-link collapsed" @click="getUser(user.user_id)" type="button" data-toggle="collapse" :data-target="'#collapse'+user.user_id" aria-expanded="true" :aria-controls="'collapse'+user.user_id">
-                    {{user.firstname}} {{user.lastname}} {{user.role}}
+                    {{user.firstname}} {{user.lastname}}
                   </button>
-                </h2>
+                  <div>
+                    {{user.role}}
+                  </div>
+                </div>
               </div>
 
               <div :id="'collapse'+user.user_id" class="collapse" :aria-labelledby="'heading'+user.user_id" data-parent="#accordion">
