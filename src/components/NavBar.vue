@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
     <router-link to="/">CFSCC_logo</router-link>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -15,6 +15,7 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/about">A propos</router-link>
         </li>
+
         <li class="nav-item dropdown">
           <a v-if="isLogged && isAdmin" class="nav-link dropdown-toggle" href="#" id="adminDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Admin
@@ -36,47 +37,47 @@
           </div>
         </li>
 
-          <li class="nav-item dropdown">  <!-- register form for keynote only -->
-            <a v-if="!isLogged" class="nav-link dropdown-toggle" href="#" id="registerDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inscription</a>
-              <div class="dropdown-menu">
-                <!-- <form class="px-4 py-3"> -->
-                    <label for="lastname">Nom de famille :</label>
-                    <input type="text" class="form-control" v-model="formGuest.lastname" id="lastname"/><br>
-                    <label for="firstname">Prénom :</label>
-                    <input type="text" class="form-control" v-model="formGuest.firstname" id="firstname"/><br>
-                    <label for="email">Email :</label>
-                    <input type="email" class="form-control" v-model="formGuest.email" id="email"/>
-                    <small id="emailHelp" class="form-text text-muted">Votre email ne sera jamais communiqué à un tiers.</small><br>
-                    <label for="phone">Tel. :</label>
-                    <input type="text" class="form-control" v-model="formGuest.phone" id="phone"/>
-                    <small id="phoneHelp" class="form-text text-muted">10 chiffres sans séparateur.</small>
-                    <small id="phoneHelp" class="form-text text-muted">Votre numéro ne sera jamais communiqué à un tiers.</small><br>
-                    <label for="password">Mot de passe :</label>
-                    <input type="password" class="form-control" v-model="formGuest.password" id="password"/>
-                    <small id="emailHelp" class="form-text text-muted">6 caractères minimum.</small><br>
-                    <label for="password_conf">Mot de passe (confirmation) :</label>
-                    <input type="password" class="form-control" v-model="formGuest.password_confirmation" id="password_confirmation"/><br>
-                  <button class="btn btn-primary" @click="registerNewGuest">Envoyer</button>
-                <!-- </form> -->
-              </div>
-          </li>
+        <li class="nav-item dropdown">  <!-- register form for keynote only -->
+          <a v-if="!isLogged" class="nav-link dropdown-toggle" href="#" id="registerDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inscription</a>
+            <div class="dropdown-menu">
+              <!-- <form class="px-4 py-3"> -->
+                  <label for="lastname">Nom de famille :</label>
+                  <input type="text" class="form-control" v-model="formGuest.lastname" id="lastname"/><br>
+                  <label for="firstname">Prénom :</label>
+                  <input type="text" class="form-control" v-model="formGuest.firstname" id="firstname"/><br>
+                  <label for="email">Email :</label>
+                  <input type="email" class="form-control" v-model="formGuest.email" id="email"/>
+                  <small id="emailHelp" class="form-text text-muted">Votre email ne sera jamais communiqué à un tiers.</small><br>
+                  <label for="phone">Tel. :</label>
+                  <input type="text" class="form-control" v-model="formGuest.phone" id="phone"/>
+                  <small id="phoneHelp" class="form-text text-muted">10 chiffres sans séparateur.</small>
+                  <small id="phoneHelp" class="form-text text-muted">Votre numéro ne sera jamais communiqué à un tiers.</small><br>
+                  <label for="password">Mot de passe :</label>
+                  <input type="password" class="form-control" v-model="formGuest.password" id="password"/>
+                  <small id="emailHelp" class="form-text text-muted">6 caractères minimum.</small><br>
+                  <label for="password_conf">Mot de passe (confirmation) :</label>
+                  <input type="password" class="form-control" v-model="formGuest.password_confirmation" id="password_confirmation"/><br>
+                <button class="btn btn-primary" @click="registerNewGuest">Envoyer</button>
+              <!-- </form> -->
+            </div>
+        </li>
 
-          <li class="nav-item dropdown">
-            <a v-if="!isLogged" class="nav-link dropdown-toggle" href="#" id="loginDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Connexion</a>
-              <div class="dropdown-menu">
-                <!-- <form class="px-4 py-3"> -->
-                  <div class="form-group">
-                    <label for="exampleDropdownFormEmail1">Email :</label>
-                    <input type="email" class="form-control" v-model="form.email" id="email1" placeholder="email@example.com">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleDropdownFormPassword1">Password :</label>
-                    <input type="password" class="form-control" v-model="form.password" id="password" placeholder="Password">
-                  </div>
-                  <button class="btn btn-primary" @click="login">Envoyer</button>
-                <!-- </form> -->
-              </div>
-          </li>
+        <li class="nav-item dropdown">
+          <a v-if="!isLogged" class="nav-link dropdown-toggle" href="#" id="loginDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Connexion</a>
+            <div class="dropdown-menu">
+              <!-- <form class="px-4 py-3"> -->
+                <div class="form-group">
+                  <label for="exampleDropdownFormEmail1">Email :</label>
+                  <input type="email" class="form-control" v-model="form.email" id="email1" placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                  <label for="exampleDropdownFormPassword1">Password :</label>
+                  <input type="password" class="form-control" v-model="form.password" id="password" placeholder="Password">
+                </div>
+                <button class="btn btn-primary" @click="login">Envoyer</button>
+              <!-- </form> -->
+            </div>
+        </li>
 
       </ul>
     </div>
