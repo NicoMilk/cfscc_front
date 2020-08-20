@@ -28,7 +28,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a v-if="isLogged" class="nav-link dropdown-toggle" href="#" id="loggedDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bonjour {{user.firstname}}</a>
+          <a v-if="isLogged && user" class="nav-link dropdown-toggle" href="#" id="loggedDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bonjour {{user.firstname}}</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <!-- <router-link class="dropdown-item" type = "button" to="#">Éditer mon profil</router-link> -->
             <button class="dropdown-item text-muted" type = "button" href="#">Modifier mon profil</button>
