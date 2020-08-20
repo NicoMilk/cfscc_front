@@ -12,7 +12,7 @@
                 <!-- <p>Places restantes : {{event.slots}}</p> -->
                 <p>Inscrits : {{event.registered}}</p>
                 <button v-if="(event.type == 'PSC1'|| event.type == 'PSE1'|| event.type == 'PSE2'|| event.type == 'RECYCLAGE') && !isLogged" @click="setCurrentEventId(event.event_id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#newGuestModal">Créer un compte et m'inscrire</button>
-                <p v-else-if="((event.type == 'DPS'|| event.type == 'Garde en caserne'|| event.type == 'Divers') && (!isAdmin || !isMember))" class="text-muted">Seuls les adhérents connectés peuvent s'inscrire à ce type d'évènement</p>
+                <!-- <p v-else-if="((event.type == 'DPS'|| event.type == 'Garde en caserne'|| event.type == 'Divers') && (!isAdmin || !isMember))" class="text-muted">Seuls les adhérents connectés peuvent s'inscrire à ce type d'évènement</p> -->
                 <button v-else-if="isLogged" @click="storeRegistration(event.event_id)" type="button" class="btn btn-primary">Je m'inscris !</button>
                 <hr>            
               </div> 

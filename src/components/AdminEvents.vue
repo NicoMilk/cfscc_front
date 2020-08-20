@@ -17,7 +17,7 @@
                     <p>Date : {{event.date_start}}</p>                
                   </div>
                   <div>
-                    <p>Places restantes : {{event.slots}}</p>                
+                    <p>Places : {{event.slots}}</p>                
                   </div>
                   <div>
                     <p>Inscrits : {{event.registered}}</p>

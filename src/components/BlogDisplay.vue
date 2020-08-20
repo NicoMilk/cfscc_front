@@ -7,7 +7,7 @@
 
       <div class="content h-100 overflow-auto bg-light px-0" >                 
           <div v-for="(blogpost, index) in blogpostsStore" :key="index">
-              <div>
+              <div class="p-2">
                 <strong>{{blogpost.title}}</strong>                
                 <p>Date : {{blogpost.created_at}}</p>                
                 <p>Maj : {{blogpost.updated_at}}</p>                
