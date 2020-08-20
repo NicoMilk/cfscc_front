@@ -7,9 +7,10 @@
           <div v-for="(event, index) in eventsStore" :key="index">
               <div>
                 <strong>{{event.type}}</strong>                
-                <p>Date : {{event.date_start}}</p>                
+                <p>Date : {{event.date_start}}</p> 
+                <p>Descriptions : {{event.description}}</p>               
                 <!-- <p v-if="event.slots_left != null">Places restantes : {{event.slots_left}}</p> -->
-                <!-- <p>Places restantes : {{event.slots}}</p> -->
+                <p >Places restantes : {{event.slots_left}}</p>
                 <p>Inscrits : {{event.registered}}</p>
                 <button v-if="(event.type == 'PSC1'|| event.type == 'PSE1'|| event.type == 'PSE2'|| event.type == 'RECYCLAGE') && !isLogged" @click="setCurrentEventId(event.event_id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#newGuestModal">Créer un compte et m'inscrire</button>
                 <!-- <p v-else-if="((event.type == 'DPS'|| event.type == 'Garde en caserne'|| event.type == 'Divers') && (!isAdmin || !isMember))" class="text-muted">Seuls les adhérents connectés peuvent s'inscrire à ce type d'évènement</p> -->

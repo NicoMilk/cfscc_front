@@ -20,6 +20,9 @@
                     <p>Places : {{event.slots}}</p>                
                   </div>
                   <div>
+                    <p>Places restantes : {{event.slots_left}}</p>                
+                  </div>
+                  <div>
                     <p>Inscrits : {{event.registered}}</p>
                   </div>
                   <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
