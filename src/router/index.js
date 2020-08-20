@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Register from '../components/Register.vue'
 import Calendar from '../views/Calendar.vue'
 import Admin from '../views/Admin.vue'
+import Dps from '../views/DPS.vue'
 import AdminUsers from '../components/AdminUsers.vue'
 import AdminEvents from '../components/AdminEvents.vue'
 import AdminBlog from '../components/AdminBlog.vue'
@@ -32,6 +33,11 @@ Vue.use(VueRouter)
   //   name: 'Login',
   //   component: Login
   // },
+  {
+    path: '/dps',
+    name: 'dps',
+    component: Dps
+  },
   {
     path: '/register',
     name: 'Register',
