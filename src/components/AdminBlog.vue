@@ -104,6 +104,13 @@ export default {
 
     registerNewBlogpost() {
       blogpost.storeBlogpost(this.form)
+      .then(
+        (response) => {
+          $(function () { // close modal after save
+            $('#newBlogpostModal').modal('toggle');
+          });
+        }
+      )
     },
 
     getBlogpost(id) {

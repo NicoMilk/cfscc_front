@@ -146,7 +146,10 @@ export default {
       event.storeEvent(this.form)
       .then(
         (response) => {
-          this.$router.push({name : "Home"});
+          $(function () { // close modal after save
+            $('#newEventModal').modal('toggle');
+          });
+          // this.$router.push({name : "Home"});
         }
       )
     },

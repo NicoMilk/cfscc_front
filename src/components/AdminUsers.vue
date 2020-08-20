@@ -23,8 +23,8 @@
                   <input type="text" class="form-control" v-model="selectedUser.lastname" id="lastname"/><br>
                   <label for="firstname">Prénom :</label>
                   <input type="text" class="form-control" v-model="selectedUser.firstname" id="firstname"/><br>
-                  <label for="email">Email :</label>
-                  <input type="email" class="form-control" v-model="selectedUser.email" id="email"/><br>
+                  <!-- <label for="email">Email :</label>
+                  <input type="email" class="form-control" v-model="selectedUser.email" id="email"/><br> -->
                   <label for="phone">Tel. :</label>
                   <input type="text" class="form-control" v-model="selectedUser.phone" id="phone"/>
                   <small id="phoneHelp" class="form-text text-muted">10 chiffres sans séparateur.</small><br>
@@ -102,10 +102,9 @@ export default {
         password: "",
         role: ""
       },
-      
+      users:{},
       selectedUser: {},
       // id: "",
-      // display: [],
     };
   },
 
@@ -115,10 +114,6 @@ export default {
 
   mounted() {
     this.$store.dispatch("getUsers");
-    
-    // for (let item = 0; i < this.userStore.length; i++) {
-    //   display.push(false)
-    // }
 
   },
 
@@ -128,14 +123,17 @@ export default {
       user.register(this.form)
       .then(
         (response) => {
+
+        $(function () { // close modal after save
+          $('#newUserModal').modal('toggle');
+        });
           // this.$root.$emit("login", true);
-          this.$router.push({name : "Home"});
+          // this.$router.push({name : "Home"});
         }
       )
     },
 
     getUser(id/*, index*/) {
-      // display.splice(index, 1, true),
       user.getUser(id)
         .then(response => this.selectedUser = response.data);
     },

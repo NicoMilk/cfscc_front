@@ -156,9 +156,8 @@ export default {
       user.register(this.formGuest)
       .then(
         (response) => {
-
-      this.formLogin.email = this.formGuest.email;
-      this.formLogin.password = this.formGuest.password;
+          this.formLogin.email = this.formGuest.email;
+          this.formLogin.password = this.formGuest.password;
 
       user.login(this.formLogin)
       .then(
@@ -170,9 +169,16 @@ export default {
       )
       .then (
         (response) => {
-      this.storeRegistration(this.selectedEvent_id)  // TODO implement (envoie le token précédent ???)
-      // await storeRegistration(this.event_id)  // TODO implement (envoie le token précédent ???)
-      })
+          this.storeRegistration(this.selectedEvent_id)
+        }
+      )
+      .then (
+        (response) => {
+          $(function () { // close modal after save
+            $('#newBlogpostModal').modal('toggle');
+          });
+        }
+      )
       }
       )
     },
@@ -186,11 +192,11 @@ export default {
       this.formEvent.event_id = event_id;
 
       registration.storeRegistration(this.formEvent)
-      .then(
-        (response) => {
-          this.$router.push({name : "Home"});
-        }
-      )
+      // .then(
+      //   (response) => {
+      //     this.$router.push({name : "Home"});
+      //   }
+      // )
     }
   },
 

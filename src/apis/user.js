@@ -14,6 +14,10 @@ export default {
         return Api().delete(`users/${id}`)
     },
 
+    getUsers() {
+        return Api().get(`users`)
+    },
+
     getUser(id) {
         return Api().get(`users/${id}`)
     },
